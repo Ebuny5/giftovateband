@@ -1,0 +1,6 @@
+{
+  "name": "Giftovate Band - Clinical EDA & HRV Wearable",
+  "description": "Interactive 3D digital twin and clinical biometrics telemetry simulator for the Giftovate Band by Giftovate Therapeutics Ltd.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

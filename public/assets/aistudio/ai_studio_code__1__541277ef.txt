@@ -1,0 +1,8 @@
+### 3-Phase Simulation & Dual-Mode Alert Architecture:
+1. Dual-Alert System:
+   - On-Band Standalone: LRA silent haptic vibration motor + OLED alert message ("ALERT: EDA SPIKE").
+   - App Connected: Python BLE bridge streaming telemetry to HidroAlly app with smartphone push notifications.
+2. 3-Phase Interactive Simulator Buttons:
+   - [Resting Phase]: 72 BPM | 2.1 μS | Status: Normal Sympathetic Baseline.
+   - [Trigger Phase (Pre-Sweat Surge)]: 94 BPM | 8.4 μS | Status: PRE-EPISODE WARNING. (Simulates band vibration + app alert: "Sudomotor spike detected! 3 minutes before sweat onset").
+   - [Active Phase]: 108 BPM | 14.2 μS | Status: Active Sweating Episode.

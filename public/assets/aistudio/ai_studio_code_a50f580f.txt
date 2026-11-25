@@ -1,0 +1,89 @@
+Build a production-grade 3D interactive web application for the "Giftovate Band" by Giftovate Therapeutics Ltd.
+
+Adopt the EXACT web layout, styling, and interactive architecture seen in the Puter medical wearables (HydroGlove, HydroSock, and HydroVisage):
+- Top half: Interactive Three.js 3D Viewport (~52vh) with studio lighting, soft circular floor shadow, and floating bottom pill toolbar with always-visible labels.
+- Bottom half: Segmented 3-tab navigation ("Biometrics", "Design & parts", "Live Telemetry") and scrollable workspace.
+- Responsive design: Stacks vertically on mobile; splits into 3D viewer on the left and tabbed workspace on the right on desktop.
+
+---
+
+### 1. Product Identity & Concept
+- Product Name: Giftovate Band
+- Subtitle: Clinical-grade EDA & HRV biometric wearable · concept v0.1
+- Company: Giftovate Therapeutics Ltd
+- Core Function: An always-on wrist wearable engineered for hyperhidrosis warriors. It continuously monitors Electrodermal Activity (EDA / skin conductance) and Heart Rate Variability (HRV) from the ventral wrist to detect sympathetic nervous system surges and predict sweat episodes before visible sweating manifests.
+- Python Integration: Designed to stream real-time biometric telemetry via a Python backend API / WebSocket directly into the HidroAlly mobile app and trigger proactive cooling alerts.
+
+---
+
+### 2. 3D Model Specifications (Three.js WebGL Engine)
+Build a realistic, procedural 3D wristband model with:
+1. Ergonomic Wrist Strap: Breathable, sweat-resistant fluoroelastomer strap with molded micro-ribbing and buckle.
+2. Ventral Sensor Pod (Skin Interface): Contoured pod sitting flush against the palmar wrist (highest sudomotor sweat gland density).
+3. Dual Ag/AgCl Dry EDA Electrodes: Two circular, gold/silver-plated dry contact electrode studs measuring tonic & phasic skin conductance (0.01 to 20 μS).
+4. Optical PPG Sensor Cluster: Central optical window with dual green & infrared micro-LEDs and photodiode photodetector for continuous BPM & HRV.
+5. Skin Temperature Thermistor: Precision thermal contact bead to correlate metabolic sweat vs. emotional sympathetic sweat.
+6. Main Chassis: Sleek matte-graphite enclosure with surgical teal accent trim.
+7. Top OLED Micro-Display: Live digital readout of Heart Rate (BPM), EDA (μS), and sympathetic surge status.
+8. Exploded View (Layer Stack):
+   - Outer Chassis & OLED Window
+   - Multi-layer Rigid-Flex PCB (MCU, Bluetooth Low Energy, AFE)
+   - 180mAh Li-Po rechargeable battery
+   - Hermetic silicone seal (IP68 water resistant)
+   - Dual EDA contact plates & optical PPG sensor lens
+9. X-Ray Mode: Outer housing turns translucent smoke-gray, revealing internal copper/silver traces, battery cell, and LED emitter optics.
+10. Numbered 3D Screen-Space Hotspots (1 to 8):
+   - Hardware-accelerated direct DOM buttons (.hotspot) with numbered badges:
+     1. Dual Ag/AgCl Dry EDA Electrodes
+     2. Optical PPG Heart Rate / HRV Cluster
+     3. Medical Thermistor (Skin Temperature)
+     4. Ventral Ergonomic Sensor Pod
+     5. Fluoroelastomer Sweat-Proof Wrist Strap
+     6. Rigid-Flex MCU & BLE Architecture
+     7. 180mAh Li-Po Cell & Magnetic Pogo Charger
+     8. Micro-OLED Biometric HUD
+   - Hotspots automatically hide when facing away from the camera.
+   - Clicking a hotspot opens an inspector card (Title, Description, Engineering Specs, Production Cost).
+11. Floating Toolbar with Persistent Labels (Always visible on all screens):
+   - [Wrist] (Front view of top display)
+   - [Sensors] (Rotates 180° to inspect the skin-contact electrodes on the bottom)
+   - [Explode] (Separates the mechanical layers smoothly)
+   - [X-ray] (Toggles chassis transparency)
+   - [Labels] (Toggles numbered 3D hotspots)
+   - [Spin] (Toggles 360° turntable orbit)
+
+---
+
+### 3. Bottom Tabs & Content Architecture
+
+#### Tab 1: Biometrics & Clinical
+- Overview Banner: "The Biometric Standard: Continuous EDA & HRV Monitoring"
+- Why Wrist EDA Matters: Explains sudomotor nerve signaling, eccrine gland recruitment, and how micro-fluctuations in skin conductance (phasic spikes) occur 2–5 minutes before visible sweating.
+- Physiological Correlation Table: Contrasts Resting / Sympathetic Surge / Physical Exertion across Heart Rate (BPM), HRV (RMSSD), and EDA (μS).
+- Python & HidroAlly App Architecture: Diagram showing how the band transmits BLE data to a Python bridge script (FastAPI/WebSocket), analyzes sudomotor drift, and fires push alerts to the mobile app.
+
+#### Tab 2: Design & parts
+- Pad Layer Stack:
+  - L1: Matte Graphite Polycarbonate Top Bezel & OLED Display
+  - L2: Hermetic Silicone Waterproof Gasket (IP68)
+  - L3: Rigid-Flex Circuit Board with Nordic nRF52840 BLE SoC
+  - L4: Dual Ag/AgCl Sintered Contact Electrodes & Optical PPG Lens
+  - — Skin (Ventral wrist stratum corneum)
+- 8 Tracked BOM Components: Full list with numbers matching the 3D hotspots, unit costs, material descriptions, and click-to-highlight in the 3D scene.
+- Manufacturing Cost Breakdown: Prototype unit cost ($42.80) vs. volume target (<$18.50).
+
+#### Tab 3: Live Telemetry & Simulation
+- Dark Telemetry Cockpit (identical to Puter design):
+  - Primary Readouts: Live Heart Rate (e.g. 78 BPM with pulsing heart indicator) and EDA (e.g. 4.2 μS with tonic baseline).
+  - Calculated Sympathetic Surge Level: Normal / Elevated / Spike Warning.
+  - Interactive Threshold Sliders:
+    - Target EDA Alert Sensitivity (default: 6.0 μS threshold)
+    - Heart Rate Spike Alert (default: 95 BPM threshold)
+  - Simulator Trigger Buttons:
+    - [Normal Resting State]
+    - [Simulate Stress / Sudden EDA Spike] (Watch EDA surge to 9.8 μS, heart rate accelerate, and an immediate simulated push notification trigger: "⚠️ Sympathetic Surge Detected! Activate Cooling Gear Now").
+    - [Physical Exercise State]
+  - Python Code Integration Drawer: Clickable tab showing the actual Python snippet (`ble_eda_monitor.py`) using `asyncio` and `bleak` to listen to band characteristics and stream alerts.
+  - Live Telemetry Event Log with timestamps.
+
+Make the design clean, responsive, fast-loading, and completely matching the teal and slate aesthetic of the previous apps.
